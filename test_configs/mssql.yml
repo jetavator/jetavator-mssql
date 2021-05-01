@@ -1,0 +1,23 @@
+services:
+  spark:
+    storage_services:
+      mssql:
+        service_type: storage
+        type: spark_mssql
+        server: $JETAVATOR_MSSQL_SERVER
+        database: $JETAVATOR_MSSQL_DATABASE
+        username: $JETAVATOR_MSSQL_USERNAME
+        password: $JETAVATOR_MSSQL_PASSWORD
+    service_type: compute
+    type: local_spark
+    storage:
+      vault: mssql
+      star: mssql
+  file_registry:
+    service_type: registry
+    type: simple_file_registry
+    storage_path: ~/.jetavator/registry
+compute: spark
+registry: file_registry
+secret_lookup: environment
+schema: $RANDOM_TEST_SCHEMA
